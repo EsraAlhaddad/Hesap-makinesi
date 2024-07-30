@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap ve jQuery İle Hesap Makinesi</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="mt-5">Bootstrap ve jQuery İle Hesap Makinesi</h1>
+  <div class="row mt-3">
+    <div class="col-sm-4">
+      <input type="text" id="result" class="form-control" disabled>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(1)">1</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(2)">2</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(3)">3</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-warning btn-block" onclick="setOperator('+')">+</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(4)">4</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(5)">5</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(6)">6</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-warning btn-block" onclick="setOperator('-')">-</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(7)">7</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(8)">8</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(9)">9</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-warning btn-block" onclick="setOperator('*')">*</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="appendNumber(0)">0</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="clearResult()">C</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-success btn-block" onclick="calculate()">=</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-warning btn-block" onclick="setOperator('/')">/</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentInput = '';
+var operator = '';
+var result = '';
+
+function appendNumber(num) {
+  currentInput += num;
+  $('#result').val(currentInput);
+}
+  function setOperator(op) {
+  operator = op;
+  result = parseFloat(currentInput);
+  currentInput = '';
+}
+
+function clearResult() {
+  currentInput = '';
+  operator = '';
+  $('#result').val('');
+}
+
+function calculate() {
+  var num = parseFloat(currentInput);
+  switch(operator) {
+    case '+':
+      result += num;
+      break;
+    case '-':
+      result -= num;
+      break;
+    case '*':
+      result *= num;
+      break;
+    case '/':
+      if (num !== 0) {
+        result /= num;
+      } else {
+        result = 'Sıfıra bölme hatası!';
+      }
+      break;
+  }
+  $('#result').val(result);
+  currentInput = '';
+  operator = '';
+}
+</script>
+
+</body>
+</html>
